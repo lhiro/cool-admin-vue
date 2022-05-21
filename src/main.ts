@@ -13,5 +13,5 @@ bootstrap(app)
 		app.mount("#app");
 	})
 	.catch((err) => {
-		console.error("COOL-ADMIN 启动失败", err);
+		console.error("启动失败", err);
 	});

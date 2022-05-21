@@ -28,7 +28,7 @@
 			</div>
 		</template>
 
-		<p class="copyright">Copyright © cool-admin-next 2023</p>
+		<!-- <p class="copyright">Copyright © cool-admin-next 2023</p> -->
 	</div>
 </template>
 
