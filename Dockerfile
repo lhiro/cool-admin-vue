@@ -9,8 +9,8 @@ RUN npm install --legacy-peer-deps -d
 COPY ./ /build
 RUN npm run build
 # FROM nginx
-# RUN mkdir /app
-
-COPY --from=build-stage /build/dist /var/project/erp/web
+# RUN mkdir /
+WORKDIR /build
+COPY /build/dist /var/project/erp/web
 # COPY --from=0 /build/nginx.conf /etc/nginx/nginx.conf
 # EXPOSE 80
