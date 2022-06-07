@@ -21,14 +21,7 @@
 
 			<cl-upsert ref="Upsert">
 				<template #slot-crud>
-					<cl-crud ref="Crud2" padding="0">
-						<el-row>
-							<cl-refresh-btn></cl-refresh-btn>
-						</el-row>
-						<el-row>
-							<cl-table :auto-height="false" ref="Table2"></cl-table>
-						</el-row>
-					</cl-crud>
+					<cl-crud ref="Crud2" padding="0"></cl-crud>
 				</template>
 			</cl-upsert>
 		</cl-crud>
@@ -45,7 +38,7 @@ const { service } = useCool();
 
 const Crud = useCrud(
 	{
-		service: service.base.project.index
+		service: service.base.contract.progress
 	},
 	(app) => {
 		app.refresh();
@@ -55,14 +48,97 @@ const Crud = useCrud(
 const Upsert = useUpsert({
 	items: [
 		{
-			label: '项目编号',
-			prop: 'projectId',
+			label: '申报名称',
+			prop: 'name',
+			required: true,
+			component: {
+				name: 'el-input'
+			}
+		},
+		{
+			label: '所属项目',
+			prop: 'belongProject',
+			span: 12,
+			required: true,
+			component: {
+				name: 'el-input'
+			}
+		},
+		{
+			label: '合同名称',
+			span: 12,
+			required: true,
+			prop: 'contractName',
+			component: {
+				name: 'el-input'
+			}
+		},
+		{
+			label: '合同金额',
+			span: 12,
+			prop: 'contractAmount',
+			required: true,
+			component: {
+				name: 'el-input-number'
+			}
+		},
+		{
+			label: '甲方单位',
+			prop: 'partyA',
+			span: 12,
+			component: {
+				name: 'el-input'
+			}
+		},
+		{
+			label: '罚款',
+			span: 12,
+			prop: 'mulct',
+			required: true,
+			component: {
+				name: 'el-input-number'
+			}
+		},
+		{
+			label: '扣款',
+			span: 12,
+			prop: 'deductions',
+			required: true,
+			component: {
+				name: 'el-input-number'
+			}
+		},
+		{
+			label: '批复金额',
+			span: 12,
+			prop: 'reply',
+			required: true,
+			component: {
+				name: 'el-input-number'
+			}
+		},
+		{
+			label: '结算类型',
+			prop: 'paymentType',
+			span: 12,
+			component: {
+				name: 'el-select',
+				props: {
+					placeholder: '请选择'
+				},
+				options: [
+					{ label: '按进度付款', value: 1 },
+					{ label: '按合同付款', value: 2 }
+				]
+			}
+		},
+		{
+			label: '备注',
+			prop: 'remark',
 			component: {
 				name: 'el-input',
 				props: {
-					readonly: true,
-					placeholder: '保存自动生成',
-					disabled: true
+					type: 'textarea'
 				}
 			}
 		}
@@ -93,105 +169,58 @@ const Table = useTable({
 			type: 'selection'
 		},
 		{
-			label: '项目编号',
-			prop: 'projectId',
+			label: '申报编号',
+			prop: 'declareId',
 			fixed: true,
-			width: 100
+			width: 180
 		},
 		{
-			label: '项目名称',
+			label: '申报名称',
 			prop: 'name',
 			fixed: true,
+			width: 180
+		},
+		{
+			label: '所属项目',
+			prop: 'belongProject',
+			width: 180
+		},
+		{
+			label: '甲方单位',
+			prop: 'partyA',
+			width: 180
+		},
+		{
+			label: '合同名称',
+			prop: 'contractName',
+			width: 180
+		},
+		{
+			label: '合同金额',
+			prop: 'contractAmount',
 			width: 100
 		},
 		{
-			label: '项目地址',
-			prop: 'address',
+			label: '批复金额',
+			prop: 'reply',
 			width: 100
 		},
 		{
-			label: '所属区域',
-			prop: 'region',
+			label: '填报人',
+			prop: 'informant',
 			width: 100
 		},
 		{
-			label: '工程工期',
-			prop: 'projectTime',
-			width: 100
+			label: '日期',
+			prop: 'date',
+			width: 100,
+			formatter(row: any, column: any, text: string) {
+				return text ? text.split(' ')[0] : '--';
+			}
 		},
 		{
-			label: '工程量估算',
-			prop: 'projectEstimate',
-			width: 100
-		},
-		{
-			label: '工程造价',
-			prop: 'projectCost',
-			width: 100
-		},
-		{
-			label: '预期利润',
-			prop: 'projectProfit',
-			width: 100
-		},
-		{
-			label: '造价（大写）',
-			prop: 'projectCostCapital',
-			width: 120
-		},
-		{
-			label: '质量等级',
-			prop: 'qualityGrade',
-			width: 100
-		},
-		{
-			label: '所属分公司',
-			prop: 'company',
-			width: 100
-		},
-		{
-			label: '所属机构',
-			prop: 'organization',
-			width: 100
-		},
-		{
-			label: '立项人',
-			prop: 'projectPeople',
-			width: 100
-		},
-		{
-			label: '立项人联系电话',
-			prop: 'contract',
-			width: 100
-		},
-		{
-			label: '跟踪人',
-			prop: 'followPeople',
-			width: 100
-		},
-		{
-			label: '建设单位',
-			prop: 'devOrganize',
-			width: 100
-		},
-		{
-			label: '建设单位联系人',
-			prop: 'devContact',
-			width: 90
-		},
-		{
-			label: '建设单位联系方式',
-			prop: 'devContactMethod',
-			width: 90
-		},
-		{
-			label: '项目类型',
-			prop: 'projectCate',
-			width: 100
-		},
-		{
-			label: '审批状态',
-			prop: 'approvalStatus',
+			label: '流程状态',
+			prop: 'status',
 			width: 100,
 			dict: [
 				{
@@ -209,33 +238,20 @@ const Table = useTable({
 			]
 		},
 		{
-			label: '项目状态',
-			prop: 'projectStatus',
-			width: 100,
-			dict: [
+			type: 'op',
+			width: 280,
+			buttons: [
+				'edit',
+				'delete',
 				{
-					label: '开启',
-					value: 1
-				},
-				{
-					label: '关闭',
-					value: 0
+					label: '查看',
+					type: 'info',
+					onClick(...rest) {
+						console.log(rest);
+						console.log('查看');
+					}
 				}
 			]
-		},
-		{
-			label: '开始时间',
-			width: 100,
-			prop: 'startTime'
-		},
-		{
-			label: '结束时间',
-			width: 100,
-			prop: 'endTime'
-		},
-		{
-			type: 'op',
-			buttons: ['edit', 'delete']
 		}
 	]
 });
@@ -251,19 +267,6 @@ const Crud2 = useCrud(
 		app.refresh();
 	}
 );
-
-const Table2 = useTable({
-	columns: [
-		{
-			label: '姓名2',
-			prop: 'name'
-		},
-		{
-			label: '创建时间',
-			prop: 'createTime'
-		}
-	]
-});
 
 const AdvSearch = useAdvSearch({
 	items: [

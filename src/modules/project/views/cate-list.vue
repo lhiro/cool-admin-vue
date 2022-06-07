@@ -45,7 +45,7 @@ const { service } = useCool();
 
 const Crud = useCrud(
 	{
-		service: service.base.sys.project
+		service: 'test'
 	},
 	(app) => {
 		app.refresh();

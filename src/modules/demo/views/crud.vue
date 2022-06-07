@@ -45,11 +45,11 @@
 </template>
 
 <script lang="tsx" setup>
-import { useCrud, useUpsert, useTable, useForm, useAdvSearch } from "@cool-vue/crud";
+import { useCrud, useUpsert, useTable, useForm, useAdvSearch } from '@cool-vue/crud';
 
 const Crud = useCrud(
 	{
-		service: "test"
+		service: 'test'
 	},
 	(app) => {
 		app.refresh();
@@ -59,35 +59,35 @@ const Crud = useCrud(
 const Upsert = useUpsert({
 	items: [
 		{
-			label: "姓名",
-			prop: "name",
+			label: '姓名',
+			prop: 'name',
 			required: true,
 			component: {
-				name: "el-input",
+				name: 'el-input',
 				props: {
-					type: "textarea"
+					type: 'textarea'
 				}
 			}
 		},
 		{
-			type: "tabs",
+			type: 'tabs',
 			props: {
 				labels: [
 					{
-						label: "A",
-						value: "1"
+						label: 'A',
+						value: '1'
 					},
 					{
-						label: "B",
-						value: "2"
+						label: 'B',
+						value: '2'
 					}
 				]
 			}
 		},
 		{
-			label: "crud",
+			label: 'crud',
 			component: {
-				name: "slot-crud"
+				name: 'slot-crud'
 			}
 		}
 	],
@@ -106,7 +106,7 @@ const Upsert = useUpsert({
 		console.log(isEdit, data);
 	},
 	onClose(done) {
-		console.log("onclose");
+		console.log('onclose');
 		done();
 	}
 });
@@ -114,29 +114,29 @@ const Upsert = useUpsert({
 const Table = useTable({
 	columns: [
 		{
-			type: "selection"
+			type: 'selection'
 		},
 		{
-			label: "姓名",
-			prop: "name"
+			label: '姓名',
+			prop: 'name'
 		},
 		{
-			label: "状态",
-			prop: "status",
+			label: '状态',
+			prop: 'status',
 			dict: [
 				{
-					label: "开启",
+					label: '开启',
 					value: 1
 				},
 				{
-					label: "关闭",
+					label: '关闭',
 					value: 0
 				}
 			]
 		},
 		{
-			type: "op",
-			buttons: ["edit", "delete"]
+			type: 'op',
+			buttons: ['edit', 'delete']
 		}
 	]
 });
@@ -145,15 +145,15 @@ const Form = useForm();
 
 const filter = {
 	form: {
-		a: "🐏",
+		a: '🐏',
 		b: 1
 	},
 	items: [
 		{
-			label: "A",
-			prop: "keyWord",
+			label: 'A',
+			prop: 'keyWord',
 			component: {
-				name: "el-input",
+				name: 'el-input',
 				props: {
 					onChange() {
 						Crud.value?.refresh();
@@ -167,7 +167,7 @@ const filter = {
 // 内嵌
 const Crud2 = useCrud(
 	{
-		service: "test"
+		service: 'test'
 	},
 	(app) => {
 		app.refresh();
@@ -177,12 +177,12 @@ const Crud2 = useCrud(
 const Table2 = useTable({
 	columns: [
 		{
-			label: "姓名2",
-			prop: "name"
+			label: '姓名2',
+			prop: 'name'
 		},
 		{
-			label: "创建时间",
-			prop: "createTime"
+			label: '创建时间',
+			prop: 'createTime'
 		}
 	]
 });
@@ -190,26 +190,26 @@ const Table2 = useTable({
 const AdvSearch = useAdvSearch({
 	items: [
 		{
-			label: "name",
-			prop: "name",
-			value: "xxx",
+			label: 'name',
+			prop: 'name',
+			value: 'xxx',
 			component: {
-				name: "el-input"
+				name: 'el-input'
 			}
 		},
 		{
-			label: "select",
-			prop: "select",
+			label: 'select',
+			prop: 'select',
 			value: 2,
 			component: {
-				name: "el-select",
+				name: 'el-select',
 				options: [
 					{
-						label: "a",
+						label: 'a',
 						value: 1
 					},
 					{
-						label: "b",
+						label: 'b',
 						value: 2
 					}
 				]
@@ -220,14 +220,14 @@ const AdvSearch = useAdvSearch({
 
 function openForm() {
 	Form.value?.open({
-		title: "自定义4",
+		title: '自定义4',
 		items: [
 			{
-				label: "name",
-				prop: "name",
+				label: 'name',
+				prop: 'name',
 				required: true,
 				component: {
-					name: "el-input"
+					name: 'el-input'
 				}
 			}
 		],
@@ -239,11 +239,11 @@ function openForm() {
 				}, 1500);
 			},
 			open(data) {
-				console.log("form open", data);
+				console.log('form open', data);
 				Crud2.value?.refresh();
 			},
 			close(done) {
-				console.log("form close");
+				console.log('form close');
 				done();
 			}
 		}

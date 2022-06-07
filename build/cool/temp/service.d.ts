@@ -129,6 +129,94 @@ declare interface BaseComm {
 	};
 }
 
+declare interface BaseContractIndex {
+	/**
+	 * 删除
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * 修改
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * 单个信息
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * 列表查询
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * 新增
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		delete: string;
+		update: string;
+		info: string;
+		list: string;
+		page: string;
+		add: string;
+	};
+}
+
+declare interface BaseContractProgress {
+	/**
+	 * 删除
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * 修改
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * 单个信息
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * 列表查询
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * 新增
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		delete: string;
+		update: string;
+		info: string;
+		list: string;
+		page: string;
+		add: string;
+	};
+}
+
 declare interface BaseOpen {
 	/**
 	 * 刷新token
@@ -199,6 +287,50 @@ declare interface BaseOpen {
 		info: string;
 		update: string;
 		delete: string;
+		add: string;
+	};
+}
+
+declare interface BaseProjectIndex {
+	/**
+	 * 删除
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * 修改
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * 单个信息
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * 列表查询
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * 新增
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		delete: string;
+		update: string;
+		info: string;
+		list: string;
+		page: string;
 		add: string;
 	};
 }
@@ -406,50 +538,6 @@ declare interface BaseSysParam {
 		page: string;
 		add: string;
 		list: string;
-	};
-}
-
-declare interface BaseSysProject {
-	/**
-	 * 删除
-	 * @returns Promise<any>
-	 */
-	delete(data?: any): Promise<any>;
-	/**
-	 * 修改
-	 * @returns Promise<any>
-	 */
-	update(data?: any): Promise<any>;
-	/**
-	 * 单个信息
-	 * @returns Promise<any>
-	 */
-	info(data?: any): Promise<any>;
-	/**
-	 * 列表查询
-	 * @returns Promise<any>
-	 */
-	list(data?: any): Promise<any>;
-	/**
-	 * 分页查询
-	 * @returns Promise<PageResponse>
-	 */
-	page(data?: any): Promise<PageResponse>;
-	/**
-	 * 新增
-	 * @returns Promise<any>
-	 */
-	add(data?: any): Promise<any>;
-	/**
-	 * 权限
-	 */
-	permission: {
-		delete: string;
-		update: string;
-		info: string;
-		list: string;
-		page: string;
-		add: string;
 	};
 }
 
@@ -795,13 +883,14 @@ declare type Service = {
 	request(data: RequestOptions): Promise<any>;
 	base: {
 		comm: BaseComm;
+		contract: { index: BaseContractIndex; progress: BaseContractProgress };
 		open: BaseOpen;
+		project: { index: BaseProjectIndex };
 		sys: {
 			department: BaseSysDepartment;
 			log: BaseSysLog;
 			menu: BaseSysMenu;
 			param: BaseSysParam;
-			project: BaseSysProject;
 			role: BaseSysRole;
 			user: BaseSysUser;
 		};

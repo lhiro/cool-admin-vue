@@ -1,15 +1,15 @@
-import { ElMessage } from "element-plus";
-import { defineStore } from "pinia";
-import { ref } from "vue";
-import { deepTree, revDeepTree, storage } from "/@/cool/utils";
-import { isArray, isEmpty, isObject, orderBy } from "lodash";
-import { viewer, service, config } from "/@/cool";
-import { revisePath } from "../utils";
+import { ElMessage } from 'element-plus';
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
+import { deepTree, revDeepTree, storage } from '/@/cool/utils';
+import { isArray, isEmpty, isObject, orderBy } from 'lodash';
+import { viewer, service, config } from '/@/cool';
+import { revisePath } from '../utils';
 
 declare enum Type {
-	"目录" = 0,
-	"菜单" = 1,
-	"权限" = 2
+	'目录' = 0,
+	'菜单' = 1,
+	'权限' = 2
 }
 
 declare interface Item {
@@ -34,12 +34,12 @@ declare interface Item {
 // 本地缓存
 const data = storage.info();
 
-export const useMenuStore = defineStore("menu", function () {
+export const useMenuStore = defineStore('menu', function () {
 	// 视图路由
-	const routes = ref<Item[]>(data["menu.routes"] || []);
+	const routes = ref<Item[]>(data['menu.routes'] || []);
 
 	// 菜单组
-	const group = ref<Item[]>(data["menu.group"] || []);
+	const group = ref<Item[]>(data['menu.group'] || []);
 
 	// 顶部菜单序号
 	const index = ref<number>(0);
@@ -48,7 +48,7 @@ export const useMenuStore = defineStore("menu", function () {
 	const list = ref<Item[]>([]);
 
 	// 权限列表
-	const perms = ref<any[]>(data["menu.perms"] || []);
+	const perms = ref<any[]>(data['menu.perms'] || []);
 
 	// 设置左侧菜单
 	function setMenu(i: number) {
@@ -76,9 +76,7 @@ export const useMenuStore = defineStore("menu", function () {
 					for (const i in d.permission) {
 						d._permission[i] =
 							list.findIndex((e: any) =>
-								e
-									.replace(/:/g, "/")
-									.includes(`${d.namespace.replace("admin/", "")}/${i}`)
+								e.replace(/:/g, '/').includes(`${d.namespace.replace('admin/', '')}/${i}`)
 							) >= 0;
 					}
 				} else {
@@ -90,7 +88,7 @@ export const useMenuStore = defineStore("menu", function () {
 		}
 
 		perms.value = list;
-		storage.set("menu.perms", list);
+		storage.set('menu.perms', list);
 
 		deep(service);
 	}
@@ -100,13 +98,13 @@ export const useMenuStore = defineStore("menu", function () {
 		viewer.add(list);
 
 		routes.value = list;
-		storage.set("menu.routes", list);
+		storage.set('menu.routes', list);
 	}
 
 	// 设置菜单组
 	function setGroup(list: Item[]) {
-		group.value = orderBy(list, "orderNum");
-		storage.set("menu.group", group.value);
+		group.value = orderBy(list, 'orderNum');
+		storage.set('menu.group', group.value);
 	}
 
 	// 获取菜单，权限信息
@@ -162,7 +160,7 @@ export const useMenuStore = defineStore("menu", function () {
 					.permmenu()
 					.then(next)
 					.catch((err) => {
-						ElMessage.error("菜单加载异常！");
+						ElMessage.error('菜单加载异常！');
 						reject(err);
 					});
 			} else {
