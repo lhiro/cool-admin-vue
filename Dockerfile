@@ -8,7 +8,7 @@ COPY package.json /build/package.json
 RUN npm install --legacy-peer-deps
 COPY . . 
 RUN npm run build
-RUN docker cp /build/dist/ /var/project/erp/web_v1
+# RUN docker cp /build/dist/ /var/project/erp/web_v1
 # COPY /build/dist /var/project/erp/web
 # COPY --from=0 /build/nginx.conf /etc/nginx/nginx.conf
 # EXPOSE 80
