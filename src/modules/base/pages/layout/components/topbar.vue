@@ -1,4 +1,6 @@
 <template>
+	<a-menu v-if="app.info.menu.isGroup" />
+
 	<div class="app-topbar">
 		<div
 			class="app-topbar__collapse"
@@ -48,12 +50,13 @@
 </template>
 
 <script lang="ts" setup>
-import { useBaseStore } from "/$/base";
+import { useBase } from "/$/base";
 import { useCool } from "/@/cool";
 import RouteNav from "./route-nav.vue";
+import AMenu from "./amenu.vue";
 
 const { router } = useCool();
-const { user, app } = useBaseStore();
+const { user, app } = useBase();
 
 // 跳转
 function onCommand(name: string) {
@@ -74,8 +77,8 @@ function onCommand(name: string) {
 	align-items: center;
 	height: 50px;
 	padding: 0 10px;
-	margin-bottom: 10px;
 	background-color: #fff;
+	margin-bottom: 10px;
 
 	&__collapse {
 		display: flex;

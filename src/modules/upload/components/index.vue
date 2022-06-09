@@ -137,7 +137,7 @@ import { useCool } from "/@/cool";
 import { extname, module, uuid } from "/@/cool/utils";
 import { isArray, isNumber } from "lodash";
 import { ElMessage } from "element-plus";
-import { useBaseStore } from "/$/base";
+import { useBase } from "/$/base";
 import Draggable from "vuedraggable";
 import { fileSize, fileName } from "../utils";
 import dayjs from "dayjs";
@@ -182,7 +182,7 @@ const emit = defineEmits(["update:modelValue", "upload", "success", "error", "pr
 const { service } = useCool();
 
 // 缓存
-const { user } = useBaseStore();
+const { user } = useBase();
 
 // 模块配置
 const { options } = module.get("upload");
@@ -352,12 +352,10 @@ async function httpRequest(req: any, item?: any) {
 						update();
 					})
 					.catch((err) => {
-						if (mode == "local") {
-							ElMessage.error(err.message);
-							item.error = err.message;
-							emit("error", item);
-							reject(err);
-						}
+						ElMessage.error(err.message);
+						item.error = err.message;
+						emit("error", item);
+						reject(err);
 					});
 			}
 
