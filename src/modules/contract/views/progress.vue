@@ -243,14 +243,14 @@ const Table = useTable({
 			buttons: [
 				'edit',
 				'delete',
-				{
-					label: '查看',
-					type: 'info',
-					onClick(...rest) {
-						console.log(rest);
-						console.log('查看');
-					}
-				}
+				// {
+				// 	label: '查看',
+				// 	type: 'info',
+				// 	onClick(...rest) {
+				// 		console.log(rest);
+				// 		console.log('查看');
+				// 	}
+				// }
 			]
 		}
 	]
