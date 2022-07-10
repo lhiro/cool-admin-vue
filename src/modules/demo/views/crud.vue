@@ -4,12 +4,14 @@
 			<el-row>
 				<cl-refresh-btn />
 				<cl-add-btn />
-				<el-button @click="openForm">Open Form</el-button>
+				<el-button @click="openForm">自定义表单</el-button>
 
-				<cl-filter label="状态">
-					<el-select></el-select>
+				<cl-filter label="字典">
+					<cl-select :options="dict.get('sex')"></cl-select>
 				</cl-filter>
 
+				<cl-flex1></cl-flex1>
+				<cl-column-custom :columns="Table?.columns" />
 				<cl-filter-group :items="filter.items"></cl-filter-group>
 			</el-row>
 
@@ -45,7 +47,12 @@
 </template>
 
 <script lang="tsx" setup>
-import { useCrud, useUpsert, useTable, useForm, useAdvSearch } from '@cool-vue/crud';
+import { useCrud, useUpsert, useTable, useForm, useAdvSearch } from "@cool-vue/crud";
+import { useDict } from "/$/dict";
+
+const { dict } = useDict();
+
+dict.refresh(["sex"]);
 
 const Crud = useCrud(
 	{
@@ -63,10 +70,15 @@ const Upsert = useUpsert({
 			prop: 'name',
 			required: true,
 			component: {
-				name: 'el-input',
-				props: {
-					type: 'textarea'
-				}
+				name: "el-input"
+			}
+		},
+		{
+			label: "认证类型",
+			prop: "authType",
+			component: {
+				name: "el-select",
+				options: dict.get("authType")
 			}
 		},
 		{
@@ -85,9 +97,18 @@ const Upsert = useUpsert({
 			}
 		},
 		{
-			label: 'crud',
+			label: "内嵌Crud",
+			group: "1",
 			component: {
 				name: 'slot-crud'
+			}
+		},
+		{
+			label: "年龄",
+			group: "2",
+			prop: "age",
+			component: {
+				name: "el-input-number"
 			}
 		}
 	],
@@ -135,8 +156,12 @@ const Table = useTable({
 			]
 		},
 		{
-			type: 'op',
-			buttons: ['edit', 'delete']
+			label: "创建时间",
+			prop: "createTime"
+		},
+		{
+			type: "op",
+			buttons: ["edit", "delete"]
 		}
 	]
 });
@@ -150,8 +175,8 @@ const filter = {
 	},
 	items: [
 		{
-			label: 'A',
-			prop: 'keyWord',
+			label: "关键字",
+			prop: "keyWord",
 			component: {
 				name: 'el-input',
 				props: {
@@ -177,8 +202,8 @@ const Crud2 = useCrud(
 const Table2 = useTable({
 	columns: [
 		{
-			label: '姓名2',
-			prop: 'name'
+			label: "姓名",
+			prop: "name"
 		},
 		{
 			label: '创建时间',
@@ -220,11 +245,11 @@ const AdvSearch = useAdvSearch({
 
 function openForm() {
 	Form.value?.open({
-		title: '自定义4',
+		title: "自定义表单",
 		items: [
 			{
-				label: 'name',
-				prop: 'name',
+				label: "姓名",
+				prop: "name",
 				required: true,
 				component: {
 					name: 'el-input'

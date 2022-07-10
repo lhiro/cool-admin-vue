@@ -38,7 +38,7 @@ const { service } = useCool();
 
 const Crud = useCrud(
 	{
-		service: service.base.contract.proceed
+		service: service.base.contract.changes
 	},
 	(app) => {
 		app.refresh();
@@ -48,7 +48,7 @@ const Crud = useCrud(
 const Upsert = useUpsert({
 	items: [
 		{
-			label: '日期',
+			label: '签证日期',
 			prop: 'date',
 			required: true,
 			span: 12,
@@ -60,7 +60,7 @@ const Upsert = useUpsert({
 			}
 		},
 		{
-			label: '收款名称',
+			label: '变更名称',
 			prop: 'name',
 			span: 12,
 			required: true,
@@ -69,8 +69,8 @@ const Upsert = useUpsert({
 			}
 		},
 		{
-			label: '项目',
-			span: 12,
+			label: '所属项目',
+			span: 11,
 			required: true,
 			prop: 'belongProject',
 			component: {
@@ -78,32 +78,35 @@ const Upsert = useUpsert({
 			}
 		},
 		{
-			label: '合同名称',
-			span: 12,
+			label: '合同变更名称',
+			span: 13,
 			required: true,
 			prop: 'contractName',
+			props: {
+				labelWidth: '139px'
+			},
 			component: {
 				name: 'el-input'
 			}
 		},
 		{
-			label: '合同金额',
+			label: '变更金额',
 			span: 12,
-			prop: 'contractAmount',
+			prop: 'amount',
 			component: {
 				name: 'el-input-number'
 			}
 		},
 		{
-			label: '甲方单位',
-			prop: 'partyA',
+			label: '变更签订人',
 			span: 12,
+			prop: 'signer',
 			component: {
 				name: 'el-input'
 			}
 		},
 		{
-			label: '结算类型',
+			label: '结算方式',
 			prop: 'paymentType',
 			span: 12,
 			component: {
@@ -112,70 +115,33 @@ const Upsert = useUpsert({
 					placeholder: '请选择'
 				},
 				options: [
-					{ label: '按进度付款', value: 1 },
-					{ label: '按合同付款', value: 2 }
+					{ label: '分段付款', value: 3 },
+					{ label: '竣工后一次结算', value: 4 },
+					{ label: '进度付款', value: 1 },
+					{ label: '合同付款', value: 2 }
 				]
 			}
 		},
 		{
-			label: '罚款',
-			span: 12,
-			prop: 'mulct',
+			label: '收款条件',
+			prop: 'receiveTerms',
 			required: true,
 			component: {
-				name: 'el-input-number'
+				name: 'el-input',
+				props: {
+					type: 'textarea'
+				}
 			}
 		},
 		{
-			label: '扣款',
-			span: 12,
-			prop: 'deductions',
+			label: '主要条款',
+			prop: 'mainTerms',
 			required: true,
 			component: {
-				name: 'el-input-number'
-			}
-		},
-		{
-			label: '已开票金额',
-			span: 12,
-			prop: 'invoicedAmount',
-			required: true,
-			component: {
-				name: 'el-input-number'
-			}
-		},
-		{
-			label: '已收款金额',
-			span: 12,
-			prop: 'proceedsAmount',
-			required: true,
-			component: {
-				name: 'el-input-number'
-			}
-		},
-		{
-			label: '收款金额',
-			span: 12,
-			prop: 'amount',
-			required: true,
-			component: {
-				name: 'el-input-number'
-			}
-		},
-		{
-			label: '账户信息',
-			prop: 'bankId',
-			required: true,
-			component: {
-				name: 'el-input'
-			}
-		},
-		{
-			label: '账户信息',
-			prop: 'informant',
-			required: true,
-			component: {
-				name: 'el-input'
+				name: 'el-input',
+				props: {
+					type: 'textarea'
+				}
 			}
 		},
 		{
@@ -215,59 +181,44 @@ const Table = useTable({
 			type: 'selection'
 		},
 		{
-			label: '收款编号',
-			prop: 'proceedId',
+			label: '签证编号',
+			prop: 'signId',
 			fixed: true,
 			width: 180
 		},
 		{
-			label: '收款名称',
+			label: '变更名称',
 			prop: 'name',
 			fixed: true,
 			width: 180
 		},
 		{
-			label: '项目',
+			label: '所属项目',
 			prop: 'belongProject',
 			width: 180
 		},
 		{
-			label: '甲方单位',
-			prop: 'partyA',
-			width: 180
-		},
-		{
-			label: '合同名称',
+			label: '变更合同名称',
 			prop: 'contractName',
 			width: 180
 		},
 		{
-			label: '合同金额',
-			prop: 'contractAmount',
-			width: 100
-		},
-		{
-			label: '收款金额',
+			label: '变更金额',
 			prop: 'amount',
-			width: 100
+			width: 120
 		},
 		{
-			label: '填报人',
-			prop: 'informant',
-			width: 100
+			label: '变更签订人',
+			prop: 'signer',
+			width: 180
 		},
 		{
-			label: '日期',
+			label: '签证日期',
 			prop: 'date',
-			width: 100,
+			width: 180,
 			formatter(row: any, column: any, text: string) {
 				return text ? text.split(' ')[0] : '--';
 			}
-		},
-		{
-			label: '账号信息',
-			prop: 'accountInfo',
-			width: 100
 		},
 		{
 			label: '流程状态',

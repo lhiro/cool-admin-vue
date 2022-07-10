@@ -261,7 +261,7 @@ declare interface BaseContractIndex {
 	};
 }
 
-declare interface BaseContractProceed {
+declare interface BaseContractProceeds {
 	/**
 	 * 删除
 	 * @returns Promise<any>
@@ -811,6 +811,100 @@ declare interface DemoGoods {
 	};
 }
 
+declare interface DictInfo {
+	/**
+	 * 删除
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * 修改
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * 获得字典数据
+	 * @returns Promise<any>
+	 */
+	data(data?: any): Promise<any>;
+	/**
+	 * 单个信息
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * 列表查询
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * 新增
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		delete: string;
+		update: string;
+		data: string;
+		info: string;
+		list: string;
+		page: string;
+		add: string;
+	};
+}
+
+declare interface DictType {
+	/**
+	 * 删除
+	 * @returns Promise<any>
+	 */
+	delete(data?: any): Promise<any>;
+	/**
+	 * 修改
+	 * @returns Promise<any>
+	 */
+	update(data?: any): Promise<any>;
+	/**
+	 * 单个信息
+	 * @returns Promise<any>
+	 */
+	info(data?: any): Promise<any>;
+	/**
+	 * 列表查询
+	 * @returns Promise<any>
+	 */
+	list(data?: any): Promise<any>;
+	/**
+	 * 分页查询
+	 * @returns Promise<PageResponse>
+	 */
+	page(data?: any): Promise<PageResponse>;
+	/**
+	 * 新增
+	 * @returns Promise<any>
+	 */
+	add(data?: any): Promise<any>;
+	/**
+	 * 权限
+	 */
+	permission: {
+		delete: string;
+		update: string;
+		info: string;
+		list: string;
+		page: string;
+		add: string;
+	};
+}
+
 declare interface SpaceInfo {
 	/**
 	 * 删除
@@ -1107,7 +1201,7 @@ declare type Service = {
 			changes: BaseContractChanges;
 			complete: BaseContractComplete;
 			index: BaseContractIndex;
-			proceed: BaseContractProceed;
+			proceeds: BaseContractProceeds;
 			progress: BaseContractProgress;
 		};
 		open: BaseOpen;
@@ -1122,6 +1216,7 @@ declare type Service = {
 		};
 	};
 	demo: { goods: DemoGoods };
+	dict: { info: DictInfo; type: DictType };
 	space: { info: SpaceInfo; type: SpaceType };
 	task: { info: TaskInfo };
 	chat: { message: ChatMessage; session: ChatSession };
